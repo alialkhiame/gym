@@ -1,2 +1,22 @@
-asdasd
-{{weight}}
+<div class="calendar">
+  <h2>Calendar for {{ currentMonthName }} {{ currentYear }}</h2>
+  <div class="days-header">
+    <span>Sun</span>
+    <span>Mon</span>
+    <span>Tue</span>
+    <span>Wed</span>
+    <span>Thu</span>
+    <span>Fri</span>
+    <span>Sat</span>
+  </div>
+  <div class="days-content">
+    <ng-container *ngFor="let week of weeks">
+      <div class="week">
+        <span *ngFor="let day of week">
+          <a *ngIf="day!==null" class="day-link" href="https://alkhiami.de">Day {{ day }}</a>
+        </span>
+      </div>
+    </ng-container>
+  </div>
+</div>
+

@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import{HomeComponent} from  './home/home.component';
 
 
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-root',
   standalone: true,
-
-  template: '<h2>asd</h2>',
-
-  styleUrl: './app.component.css'
+  imports: [ HomeComponent],  // Add this if you are using forms features
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'calenderFrontend';
 
