@@ -10,5 +10,6 @@ import { Component, Inject } from '@angular/core';
   styleUrl: './day-clicked-dialog.component.css'
 })
 export class DayClickedDialogComponent {
+
   constructor() {}
 }

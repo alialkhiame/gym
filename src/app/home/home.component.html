@@ -13,10 +13,19 @@
     <ng-container *ngFor="let week of weeks">
       <div class="week">
         <span *ngFor="let day of week">
-          <a *ngIf="day!==null" class="day-link" href="https://alkhiami.de">Day {{ day }}</a>
+          <a *ngIf="day !== null" class="day-link" href="#" (click)="openDialog(day)">Day {{ day }}</a>
         </span>
       </div>
     </ng-container>
   </div>
 </div>
 
+<!-- Modal Dialog -->
+<div id="myModal" class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeDialog()">&times;</span>
+    <p>Details for Day {{ selectedDay }}</p>
+    <input [(ngModel)]="inputText" placeholder="Enter details">
+    <button (click)="saveDetails()">Save</button>
+  </div>
+</div>

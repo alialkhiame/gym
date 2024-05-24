@@ -11,16 +11,17 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  daysInMonth: number=0;
-  daysArray: number[]; // flat array of day numbers
-  weeks: (number | null)[][]; // array of arrays, each can hold number or null, representing a week
-  currentMonthName: string="";
-  currentYear: number=0;
+  daysInMonth: number = 0;
+  daysArray: number[] = []; // flat array of day numbers
+  weeks: (number | null)[][] = []; // array of arrays, each can hold number or null, representing a week
+  currentMonthName: string = "";
+  currentYear: number = 0;
+  isModalOpen = false;
+  selectedDay: number | null = null;
+  inputText: string = "";
+  dayDetails: { [key: number]: string } = {}; // Store details for each day
 
-  constructor() {
-    this.weeks = [];
-    this.daysArray = [];
-  }
+  constructor() {}
 
   ngOnInit() {
     const currentDate = new Date();
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
     this.currentYear = currentDate.getFullYear();
 
     this.daysInMonth = this.getCurrentMonthDays();
-    this.daysArray = Array.from({length: this.daysInMonth}, (_, i) => i + 1);
+    this.daysArray = Array.from({ length: this.daysInMonth }, (_, i) => i + 1);
     this.generateWeeks();
   }
 
@@ -39,6 +40,25 @@ export class HomeComponent implements OnInit {
     const firstDayNextMonth = new Date(year, month + 1, 1);
     const lastDayCurrentMonth = new Date(firstDayNextMonth.getTime() - (24 * 60 * 60 * 1000));
     return lastDayCurrentMonth.getDate();
+  }
+
+  openDialog(day: number): void {
+    this.selectedDay = day;
+    this.inputText = this.dayDetails[day] || ""; // Load existing details if available
+    this.isModalOpen = true;
+  }
+
+  closeDialog(): void {
+    this.isModalOpen = false;
+    this.selectedDay = null;
+    this.inputText = "";
+  }
+
+  saveDetails(): void {
+    if (this.selectedDay !== null) {
+      this.dayDetails[this.selectedDay] = this.inputText;
+      this.closeDialog();
+    }
   }
 
   generateWeeks() {
